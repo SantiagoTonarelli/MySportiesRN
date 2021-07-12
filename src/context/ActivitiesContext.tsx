@@ -5,18 +5,20 @@ import {ActivitySelect, Activity} from '../interfaces/interfaces';
 
 type ActivitiesContextProps = {
   activities: ActivitySelect[];
+  loading: boolean;
   finishAdd: boolean;
-  startAddActivity: (activity: ActivitySelect) => () => void;
-  finishAddActivity: () => void;
+  startAddActivity: (activity: ActivitySelect) => void;
   startLoading: () => void;
   endLoading: () => void;
+  startFormAddActivity: () => void;
+  finishAddActivity: () => void;
 };
 
 const ActivitiesInicialState: ActivitiesState = {
   activities: [],
   activity: null,
-  finishAdd: false,
   loading: false,
+  finishAdd: false,
 };
 
 export const ActivitiesContext = createContext({} as ActivitiesContextProps);
@@ -28,21 +30,24 @@ export const ActivitiesProvider = ({children}: any) => {
   );
 
   const startAddActivity = (activity: ActivitySelect) => {
-    return () => {
-      dispatch({type: '[ui] Loading'});
-      setTimeout(() => {
-        dispatch({
-          type: '[Activities] Add new',
-          payload: activity,
-        });
-        dispatch({type: '[ui] End Loading'});
-      }, 2000);
-    };
+    dispatch({type: '[ui] Loading'});
+    setTimeout(() => {
+      dispatch({
+        type: '[Activities] Add new',
+        payload: activity,
+      });
+      dispatch({type: '[ui] End Loading'});
+    }, 2000);
   };
 
   const finishAddActivity = () =>
     dispatch({
       type: '[Activities] Finish add selected activity',
+    });
+
+  const startFormAddActivity = () =>
+    dispatch({
+      type: '[Activities] Start activity',
     });
 
   const startLoading = () => dispatch({type: '[ui] Loading'});
@@ -53,9 +58,10 @@ export const ActivitiesProvider = ({children}: any) => {
       value={{
         ...state,
         startAddActivity,
-        finishAddActivity,
         startLoading,
         endLoading,
+        finishAddActivity,
+        startFormAddActivity,
       }}>
       {children}
     </ActivitiesContext.Provider>

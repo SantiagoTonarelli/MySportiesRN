@@ -1,16 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useWindowDimensions} from 'react-native';
 import {View, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
 import {Card, Title, useTheme} from 'react-native-paper';
 import {activities} from '../data/activitiesData';
 import {StackParams} from '../navegations/StackNavigator';
+import {ActivitiesContext} from '../context/ActivitiesContext';
 
 interface Props extends StackScreenProps<StackParams, 'Actividades'> {}
 
 const Activities = ({navigation}: Props) => {
   const {width} = useWindowDimensions();
   const {colors} = useTheme();
+  const {startFormAddActivity} = useContext(ActivitiesContext);
 
   return (
     <View style={styles.center}>
@@ -34,6 +36,7 @@ const Activities = ({navigation}: Props) => {
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => {
+              startFormAddActivity();
               navigation.navigate('Formulario', {
                 activity: item,
               });

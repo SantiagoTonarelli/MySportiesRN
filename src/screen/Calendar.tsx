@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {useWindowDimensions} from 'react-native';
 import {View, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
 import {Card, Title, Text, useTheme, Paragraph} from 'react-native-paper';
@@ -9,7 +9,11 @@ import {ActivitiesContext} from '../context/ActivitiesContext';
 const Calendar = () => {
   const {width} = useWindowDimensions();
   const {colors} = useTheme();
-  const {activities} = useContext(ActivitiesContext);
+  const {activities, finishAdd, finishAddActivity} = useContext(ActivitiesContext);
+
+  useEffect(() => {
+    finishAdd && finishAddActivity();
+  }, [finishAdd]);
 
   return (
     <View style={styles.center}>

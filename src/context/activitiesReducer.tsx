@@ -3,8 +3,8 @@ import {ActivitySelect, Activity} from '../interfaces/interfaces';
 export interface ActivitiesState {
   activities: ActivitySelect[];
   activity: Activity | null;
-  finishAdd: boolean;
   loading: boolean;
+  finishAdd: boolean;
 }
 
 type ActivitiesAction =
@@ -14,7 +14,9 @@ type ActivitiesAction =
     }
   | {type: '[Activities] Finish add selected activity'}
   | {type: '[ui] Loading'}
-  | {type: '[ui] End Loading'};
+  | {type: '[ui] End Loading'}
+  | {type: '[Activities] Start activity'}
+  | {type: '[Activities] Finish add selected activity'};
 
 export const ActivitiesReducer = (
   state: ActivitiesState,
@@ -27,12 +29,18 @@ export const ActivitiesReducer = (
         activities: [action.payload, ...state.activities].sort(
           (a, b) => a.date.getDate() - b.date.getDate(),
         ),
-        finishAdd: true,
+        finishAdd: false,
       };
     case '[Activities] Finish add selected activity':
       return {
         ...state,
         finishAdd: false,
+      };
+
+    case '[Activities] Start activity':
+      return {
+        ...state,
+        finishAdd: true,
       };
 
     case '[ui] Loading':
