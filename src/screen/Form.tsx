@@ -135,7 +135,7 @@ const Form = ({route, navigation}: Props) => {
   const onConfirm = React.useCallback(
     ({hours, minutes}) => {
       setVisible(false);
-      setTime(`${hours}:${minutes}`);
+      setTime(`${hours}:${minutes < 10 ? '0'+minutes : minutes}`);
     },
     [setVisible, setTime],
   );
@@ -165,7 +165,7 @@ const Form = ({route, navigation}: Props) => {
               padding: 10,
               textAlign: 'center',
             }}>
-            Seleccione una actividad
+            Ingrese sus datos
           </Title>
           <TextInput
             label="Ingrese su nombre (solo letras)"

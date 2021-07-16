@@ -26,9 +26,10 @@ const Calendar = () => {
               style={{
                 color: colors.primary,
                 margin: 5,
+                justifyContent: 'center',
                 textAlign: 'center',
               }}>
-              Seleccione una actividad
+              Agenda
             </Title>
           ) : null
         }
@@ -40,11 +41,12 @@ const Calendar = () => {
         ListEmptyComponent={() => (
           <Text
             style={{
-              flexGrow: 1,
+              marginTop:40,
               justifyContent: 'center',
               textAlign: 'center',
               alignItems: 'center',
               color: colors.primary,
+              fontSize:30
             }}>
             No tiene actividades agendadas
           </Text>

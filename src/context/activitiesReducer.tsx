@@ -27,7 +27,7 @@ export const ActivitiesReducer = (
       return {
         ...state,
         activities: [action.payload, ...state.activities].sort(
-          (a, b) => a.date.getDate() - b.date.getDate(),
+          (a, b) => a.date.getTime() - b.date.getTime(),
         ),
         finishAdd: false,
       };
