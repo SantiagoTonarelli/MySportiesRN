@@ -147,7 +147,15 @@ const Form = ({route, navigation}: Props) => {
       showsVerticalScrollIndicator={false}>
       {loading ? (
         <View style={styles.loading}>
-          <ActivityIndicator animating={true} />
+          <ActivityIndicator animating={true} size={50}/>
+          <Text
+            style={{
+              marginTop:10,
+              fontSize:20,
+              color: colors.primary,
+            }}>
+            Procesando...
+          </Text>
         </View>
       ) : (
         <View style={styles.center}>

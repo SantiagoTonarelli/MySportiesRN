@@ -19,6 +19,7 @@ const Calendar = () => {
   return (
     <View style={styles.center}>
       <FlatList
+        contentContainerStyle={{flexGrow: 1}}
         ListHeaderComponent={() =>
           activities && activities.length > 0 ? (
             <Title
