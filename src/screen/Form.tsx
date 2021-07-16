@@ -29,7 +29,7 @@ const Form = ({route, navigation}: Props) => {
 
   const [datepicker, setDatepicker] = useState<Date | undefined>(undefined);
   const [date, setDate] = useState<moment.Moment | undefined>(undefined);
-  const [time, setTime] = useState('0:00');
+  const [time, setTime] = useState<string | undefined>(undefined);
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(false);
 
@@ -147,11 +147,11 @@ const Form = ({route, navigation}: Props) => {
       showsVerticalScrollIndicator={false}>
       {loading ? (
         <View style={styles.loading}>
-          <ActivityIndicator animating={true} size={50}/>
+          <ActivityIndicator animating={true} size={50} />
           <Text
             style={{
-              marginTop:10,
-              fontSize:20,
+              marginTop: 10,
+              fontSize: 20,
               color: colors.primary,
             }}>
             Procesando...
@@ -186,7 +186,7 @@ const Form = ({route, navigation}: Props) => {
             onPress={() => setOpen(true)}
             uppercase={false}
             mode="outlined">
-            Fecha
+            {date ? date?.format('DD/MM/yyyy') : 'Fecha'}
           </Button>
           {errorDate && <Text style={{color: 'red'}}>{helperDateText}</Text>}
           <DatePickerModal
@@ -202,7 +202,7 @@ const Form = ({route, navigation}: Props) => {
             onPress={() => setVisible(true)}
             uppercase={false}
             mode="outlined">
-            Hora
+            {time ? time : 'Hora'}
           </Button>
           {errorMoment && (
             <Text style={{color: 'red'}}>{helperMomentText}</Text>
