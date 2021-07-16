@@ -53,7 +53,7 @@ const Form = ({route, navigation}: Props) => {
 
   const onSubmit = () => {
     if (isFormValid()) {
-      const dateToString = date + ' ' + time;
+      const dateToString = date?.format('DD/MM/yyyy') + ' ' + time;
       const dateFormat = moment(dateToString, 'DD/MM/yyyy HH:mm').toDate();
       const activityData = {
         activity,
@@ -146,7 +146,9 @@ const Form = ({route, navigation}: Props) => {
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}>
       {loading ? (
-        <ActivityIndicator animating={true} />
+        <View style={styles.loading}>
+          <ActivityIndicator animating={true} />
+        </View>
       ) : (
         <View style={styles.center}>
           <Title
@@ -234,6 +236,11 @@ const styles = StyleSheet.create({
   center: {
     flex: 1,
     alignItems: 'center',
+  },
+  loading: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   textInput: {
     justifyContent: 'center',

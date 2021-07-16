@@ -9,10 +9,11 @@ import {ActivitiesContext} from '../context/ActivitiesContext';
 const Calendar = () => {
   const {width} = useWindowDimensions();
   const {colors} = useTheme();
-  const {activities, finishAdd, finishAddActivity} = useContext(ActivitiesContext);
+  const {activities, finishAdd, finishAddActivity} =
+    useContext(ActivitiesContext);
 
   useEffect(() => {
-    finishAdd && finishAddActivity();
+    !finishAdd && finishAddActivity();
   }, [finishAdd]);
 
   return (
